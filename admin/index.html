@@ -8,8 +8,51 @@
 </head>
 <body>
 
+<div id="app">
+    <div class="jumbotron">
+        <div class="container">
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="../index.html">返回首页</a>
+                </li>
+            </ul>
+            <h1 class="display-4 text-center">人民网后台管理系统</h1>
+        </div>
+    </div>
+    <div class="container">
+        <button type="button" class="btn btn-primary">添加新闻</button>
 
-
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">分类</th>
+                <th scope="col">标题</th>
+                <th scope="col">作者</th>
+                <th scope="col">发布时间</th>
+                <th scope="col">发布状态</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(item,index) in news">
+                <th scope="row">{{index}}</th>
+                <td>{{item.sort}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.time}}</td>
+                <td>
+                    <button type="button" class="btn btn-success">已发布</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning">编辑</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
 <script src="../js/script.js"></script>
 </body>
