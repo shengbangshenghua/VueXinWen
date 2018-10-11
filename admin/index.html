@@ -20,7 +20,61 @@
         </div>
     </div>
     <div class="container">
-        <button type="button" class="btn btn-primary">添加新闻</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tianjiaxinwen">添加新闻</button>
+        <div class="modal fade" id="tianjiaxinwen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">添加新闻</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form>
+                            <div class="form-group">
+                                <label>文章标题</label>
+                                <input type="text" class="form-control" v-model="title">
+                            </div>
+                            <div class="form-group">
+                                <label>发布人</label>
+                                <input type="text" class="form-control" v-model="name">
+                            </div>
+                            <div class="form-group">
+                                <label>文章内容</label>
+                                <textarea class="form-control" rows="3" v-model="content"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>分类</label>
+                                <select class="form-control" v-model="sort">
+                                    <option>健康</option>
+                                    <option>科普</option>
+                                    <option>教育</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-check">
+
+                                <input type="checkbox" class="form-check-input" checked="checked" v-model="state">
+                                <label class="form-check-label">已发布</label>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" @click="add">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
 
         <table class="table table-bordered">
             <thead>
@@ -42,18 +96,73 @@
                 <td>{{item.name}}</td>
                 <td>{{item.time}}</td>
                 <td>
-                    <button type="button" class="btn btn-success">已发布</button>
+                    <button type="button" class="btn" :class="{'btn-success':item.state}" @click="zhuangtai(index)"><template v-if="item.state">已发布</template><template v-else>待修改</template></button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-warning">编辑</button>
-                    <button type="button" class="btn btn-danger">删除</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#bianjixinwen" @click="edit(index)">编辑</button>
+                    <button type="button" class="btn btn-danger" @click="del(index)">删除</button>
                 </td>
             </tr>
             </tbody>
         </table>
+
+        <div class="modal fade" id="bianjixinwen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">编辑新闻</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form>
+                            <div class="form-group">
+                                <label>文章标题</label>
+                                <input type="text" class="form-control" v-model="title">
+                            </div>
+                            <div class="form-group">
+                                <label>发布人</label>
+                                <input type="text" class="form-control" v-model="name">
+                            </div>
+                            <div class="form-group">
+                                <label>文章内容</label>
+                                <textarea class="form-control" rows="3" v-model="content"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>分类</label>
+                                <select class="form-control" v-model="sort">
+                                    <option>健康</option>
+                                    <option>科普</option>
+                                    <option>教育</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-check">
+
+                                <input type="checkbox" class="form-check-input" checked="checked" v-model="state">
+                                <label class="form-check-label">已发布</label>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" @click="save">确认修改</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="../js/script.js"></script>
 </body>
 </html>
